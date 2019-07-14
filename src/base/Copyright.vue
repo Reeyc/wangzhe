@@ -11,6 +11,6 @@
   height: 50px
   line-height: 50px
   margin-top: 8px
-  background-color: #e9e9e9
+  background-color: #eee
   text-align: center
 </style>

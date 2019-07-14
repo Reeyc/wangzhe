@@ -2,28 +2,45 @@
   <div class="equip">
     <div class="title">
       <h4>装备信息</h4>
-      <p>全部装备 ></p>
+      <router-link to="/equip">
+        <p>全部装备 ></p>
+      </router-link>
     </div>
     <ul class="main">
-      <li class="equip-item">
+      <li class="equip-item" @click="go('辉月')">
         <div class="shade"></div>
         <span>辉月</span>
       </li>
-      <li class="equip-item">
+      <li class="equip-item" @click="go('时之预言')">
         <div class="shade"></div>
         <span>时之预言</span>
       </li>
-      <li class="equip-item">
+      <li class="equip-item" @click="go('末世')">
         <div class="shade"></div>
         <span>末世</span>
       </li>
-      <li class="equip-item">
+      <li class="equip-item" @click="go('纯净苍穹')">
         <div class="shade"></div>
         <span>纯净苍穹</span>
       </li>
     </ul>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    go(val) {
+      this.$router.push({
+        path: "/equip",
+        query: {
+          equip: val
+        }
+      });
+    }
+  }
+};
+</script>
 
 <style lang="stylus" scoped>
 .equip
@@ -36,6 +53,7 @@
     h4
       font-weight: bold
     p
+      color: #333
       cursor: pointer
 .main
   .equip-item
@@ -63,10 +81,10 @@
       background-position: -420px -130px
     &:nth-child(3) .shade
       background: url('../../../assets/images/031355112064.jpg') no-repeat
-      background-position: -140px -45px  
+      background-position: -140px -45px
     &:nth-child(4) .shade
       background: url('../../../assets/images/20181208200153_d41d8cd98f00b204e9800998ecf8427e_1.jpeg') no-repeat
-      background-position: -180px -80px    
+      background-position: -180px -80px
 @media (min-width: 768px)
   .main
     .equip-item
@@ -74,13 +92,13 @@
         background-size: cover
         background-position: 0 -130px
       &:nth-child(2) .shade
-        background-position: -210px -130px  
+        background-position: -210px -130px
       &:nth-child(3) .shade
         background-size: cover
-        background-position: 0 -70px  
+        background-position: 0 -70px
       &:nth-child(4) .shade
         background-size: cover
-        background-position: -100px -110px    
+        background-position: -100px -110px
 @media (min-width: 900px)
   .main
     .equip-item
@@ -89,13 +107,13 @@
         background-size: cover
         background-position: 0 -210px
       &:nth-child(2) .shade
-        background-position: 0 -130px  
+        background-position: 0 -130px
       &:nth-child(3) .shade
         background-size: cover
-        background-position: 0 -130px    
+        background-position: 0 -130px
       &:nth-child(4) .shade
         background-size: cover
-        background-position: 0 -180px      
+        background-position: 0 -180px
 </style>
 <!--图片太难找了，全是上网乱找的规格不一的图片，还要处理各种设备的bg-position，冗余代码比较多-->
 

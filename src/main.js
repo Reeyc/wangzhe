@@ -3,8 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
+import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import fastClick from 'fastClick'
+
 Vue.use(VueAwesomeSwiper)
+
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function () {
+    fastClick.attach(document.body);
+  }, false);
+}
 
 import 'styles/style/reset.css'
 import 'styles/style/iconfont.css'
@@ -13,18 +23,18 @@ import 'swiper/dist/css/swiper.css'
 import {
   // Pagination,
   // Dialog,
-  // Autocomplete,
-  // Dropdown,
-  // DropdownMenu,
-  // DropdownItem,
+  Autocomplete,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   // Menu,
   // Submenu,
   // MenuItem,
   // MenuItemGroup,
   // Input,
   // InputNumber,
-  // Radio,
-  // RadioGroup,
+  Radio,
+  RadioGroup,
   // RadioButton,
   // Checkbox,
   // CheckboxButton,
@@ -33,7 +43,7 @@ import {
   // Select,
   // Option,
   // OptionGroup,
-  // Button,
+  Button,
   // ButtonGroup,
   // Table,
   // TableColumn,
@@ -42,8 +52,8 @@ import {
   // TimePicker,
   // Popover,
   // Tooltip,
-  // Breadcrumb,
-  // BreadcrumbItem,
+  Breadcrumb,
+  BreadcrumbItem,
   // Form,
   // FormItem,
   // Tabs,
@@ -59,7 +69,7 @@ import {
   // Progress,
   // Spinner,
   // Badge,
-  // Card,
+  Card,
   // Rate,
   // Steps,
   // Step,
@@ -93,18 +103,18 @@ import {
 
 // Vue.use(Pagination);
 // Vue.use(Dialog);
-// Vue.use(Autocomplete);
-// Vue.use(Dropdown);
-// Vue.use(DropdownMenu);
-// Vue.use(DropdownItem);
+Vue.use(Autocomplete);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 // Vue.use(Menu);
 // Vue.use(Submenu);
 // Vue.use(MenuItem);
 // Vue.use(MenuItemGroup);
 // Vue.use(Input);
 // Vue.use(InputNumber);
-// Vue.use(Radio);
-// Vue.use(RadioGroup);
+Vue.use(Radio);
+Vue.use(RadioGroup);
 // Vue.use(RadioButton);
 // Vue.use(Checkbox);
 // Vue.use(CheckboxButton);
@@ -113,7 +123,7 @@ import {
 // Vue.use(Select);
 // Vue.use(Option);
 // Vue.use(OptionGroup);
-// Vue.use(Button);
+Vue.use(Button);
 // Vue.use(ButtonGroup);
 // Vue.use(Table);
 // Vue.use(TableColumn);
@@ -122,8 +132,8 @@ import {
 // Vue.use(TimePicker);
 // Vue.use(Popover);
 // Vue.use(Tooltip);
-// Vue.use(Breadcrumb);
-// Vue.use(BreadcrumbItem);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
 // Vue.use(Form);
 // Vue.use(FormItem);
 // Vue.use(Tabs);
@@ -139,7 +149,7 @@ Vue.use(Col);
 // Vue.use(Progress);
 // Vue.use(Spinner);
 // Vue.use(Badge);
-// Vue.use(Card);
+Vue.use(Card);
 // Vue.use(Rate);
 // Vue.use(Steps);
 // Vue.use(Step);
@@ -176,6 +186,7 @@ Vue.use(Scrollbar);
 // Vue.prototype.$notify = Notification;
 // Vue.prototype.$message = Message;
 
+Vue.prototype.$axios = axios
 Vue.prototype.$bus = new Vue()
 
 Vue.config.productionTip = false
@@ -184,6 +195,9 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {
+    App
+  },
   template: '<App/>'
 })

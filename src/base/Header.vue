@@ -1,10 +1,12 @@
 <!--公共头部-->
 <template>
   <el-row type="flex" justify="space-between" align="middle" class="header">
-    <div class="logo">
-      <img src="../assets/images/logo.jpg" />
-      <h1 class="title">王者荣耀资料站</h1>
-    </div>
+    <el-link href="/" :underline="false">
+      <div class="logo">
+        <img src="../assets/images/logo.jpg" />
+        <h1 class="title">王者荣耀资料站</h1>
+      </div>
+    </el-link>
     <div class="avatar">我</div>
   </el-row>
 </template>
