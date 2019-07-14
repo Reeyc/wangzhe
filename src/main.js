@@ -75,8 +75,8 @@ import {
   // Step,
   // Carousel,
   // CarouselItem,
-  // Collapse,
-  // CollapseItem,
+  Collapse,
+  CollapseItem,
   // Cascader,
   // ColorPicker,
   // Transfer,
@@ -96,7 +96,7 @@ import {
   // CascaderPanel,
   // Loading,
   // MessageBox,
-  // Message,
+  Message,
   // Notification,
   Scrollbar
 } from 'element-ui';
@@ -155,8 +155,8 @@ Vue.use(Card);
 // Vue.use(Step);
 // Vue.use(Carousel);
 // Vue.use(CarouselItem);
-// Vue.use(Collapse);
-// Vue.use(CollapseItem);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
 // Vue.use(Cascader);
 // Vue.use(ColorPicker);
 // Vue.use(Transfer);
@@ -184,7 +184,7 @@ Vue.use(Scrollbar);
 // Vue.prototype.$confirm = MessageBox.confirm;
 // Vue.prototype.$prompt = MessageBox.prompt;
 // Vue.prototype.$notify = Notification;
-// Vue.prototype.$message = Message;
+Vue.prototype.$message = Message;
 
 Vue.prototype.$axios = axios
 Vue.prototype.$bus = new Vue()

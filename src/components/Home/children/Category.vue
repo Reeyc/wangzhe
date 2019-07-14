@@ -2,18 +2,35 @@
   <div class="category">
     <div class="title">
       <h4>英雄分类</h4>
-      <p>全部英雄 ></p>
+      <router-link to="/hero">
+        <p>全部英雄 ></p>
+      </router-link>
     </div>
     <ul class="main">
-      <li class="category-item">战士</li>
-      <li class="category-item">法师</li>
-      <li class="category-item">刺客</li>
-      <li class="category-item">辅助</li>
-      <li class="category-item">坦克</li>
-      <li class="category-item">射手</li>
+      <li class="category-item" @click="go(1)">战士</li>
+      <li class="category-item" @click="go(2)">法师</li>
+      <li class="category-item" @click="go(3)">坦克</li>
+      <li class="category-item" @click="go(4)">刺客</li>
+      <li class="category-item" @click="go(5)">射手</li>
+      <li class="category-item" @click="go(6)">辅助</li>
     </ul>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    go(val) {
+      this.$router.push({
+        path: "/hero",
+        query: {
+          hero: val
+        }
+      });
+    }
+  }
+};
+</script>
 
 <style lang="stylus" scoped>
 .category
@@ -26,6 +43,7 @@
     h4
       font-weight: bold
     p
+      color: #333
       cursor: pointer
   .main
     display: flex

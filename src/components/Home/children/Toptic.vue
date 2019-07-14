@@ -2,7 +2,9 @@
   <div class="toptic">
     <div class="title">
       <h4>专题推荐</h4>
-      <p>更多专题 ></p>
+      <router-link to="/hero">
+        <p>更多专题 ></p>
+      </router-link>
     </div>
     <ul class="main">
       <li class="toptic-item">
@@ -33,6 +35,7 @@
       font-weight: bold
     p
       cursor: pointer
+      color: #333
   .main
     display: flex
     flex-wrap: wrap
@@ -74,5 +77,5 @@
     &:nth-child(3)
       background-position: 0 -50px
     &:nth-child(4)
-      background-position: 0 -65px  
+      background-position: 0 -65px
 </style>

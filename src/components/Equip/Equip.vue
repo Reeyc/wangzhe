@@ -35,7 +35,13 @@
           <el-card :ref="item.item_name">
             <template slot="header">
               <span>{{item.item_name}}</span>
-              <i class="el-icon-star-off" @click="collect" :isCollect="0" :index="item.item_id"></i>
+              <i
+                class="el-icon-star-off"
+                @click="collect"
+                :isCollect="0"
+                :name="item.item_name"
+                :index="item.item_id"
+              ></i>
             </template>
             <div class="info">
               <i class="el-icon-loading" v-show="loading"></i>
@@ -124,6 +130,11 @@ export default {
         this.handleCollectEquip(currentEquip);
         e.target.setAttribute("isCollect", 1);
         e.target.className += " el-icon-star-on";
+        this.$message({
+          message: `将【${e.target.getAttribute("name")}】添加至收藏夹`,
+          duration: 1500,
+          type: "success"
+        });
       } else {
         //取消收藏
         this.collectEquip.forEach((item, index) => {
@@ -190,18 +201,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~styles/style/mixins.styl'
+@import '~styles/style/varible.styl'
 .el-autocomplete
-  width: 100%
-  padding: 0 10px
-  position: fixed
-  z-index: 998
+  autocomplete()
 .container
   padding: 10px
   padding-top: 40px
   .el-radio-group
-    margin-top: 15px
-    display: flex
-    justify-content: space-between
+    radio-group()
     .el-radio
       margin: 0
       & >>> .el-radio__label
@@ -232,7 +240,7 @@ export default {
         display: flex
         align-items: center
         .el-icon-loading
-          color: #409EFF
+          color: $theme-color
           font-size: 2em
         .desc
           margin-left: 2em
@@ -241,7 +249,7 @@ export default {
     .el-dropdown-link
       margin-top: 1.5em
       cursor: pointer
-      color: #409EFF
+      color: $theme-color
 @media (min-width: 768px)
   .container >>> .el-radio-group
     padding: 0 20px

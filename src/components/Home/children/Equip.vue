@@ -115,5 +115,5 @@ export default {
         background-size: cover
         background-position: 0 -180px
 </style>
-<!--图片太难找了，全是上网乱找的规格不一的图片，还要处理各种设备的bg-position，冗余代码比较多-->
+<!--图片太难找，全是上网乱找的规格不一的图片，还要处理各种设备的bg-position，冗余代码比较多-->
 
