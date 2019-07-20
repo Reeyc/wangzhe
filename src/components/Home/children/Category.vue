@@ -2,7 +2,7 @@
   <div class="category">
     <div class="title">
       <h4>英雄分类</h4>
-      <router-link to="/hero">
+      <router-link to="/hero/all">
         <p>全部英雄 ></p>
       </router-link>
     </div>
@@ -21,12 +21,7 @@
 export default {
   methods: {
     go(val) {
-      this.$router.push({
-        path: "/hero",
-        query: {
-          hero: val
-        }
-      });
+      this.$router.push(`/hero/${val}`);
     }
   }
 };
@@ -64,18 +59,18 @@ export default {
       &:nth-child(1)
         width: 50%
         margin: 0
-        background-color: rgba(220, 129, 55, 0.8)
+        background-color: rgba(220, 129, 55, 0.7)
       &:nth-child(2)
         width: 50%
         margin: 0
-        background-color: rgba(38, 191, 142, 0.8)
+        background-color: rgba(38, 191, 142, 0.7)
       &:nth-child(3)
-        background-color: rgba(72, 137, 199, 0.8)
+        background-color: rgba(72, 137, 199, 0.7)
       &:nth-child(4)
-        background-color: rgba(220, 129, 55, 0.8)
+        background-color: rgba(220, 129, 55, 0.7)
       &:nth-child(5)
-        background-color: rgba(38, 191, 142, 0.8)
+        background-color: rgba(38, 191, 142, 0.7)
       &:last-child
         width: 100%
-        background-color: rgba(72, 137, 199, 0.8)
+        background-color: rgba(72, 137, 199, 0.7)
 </style>

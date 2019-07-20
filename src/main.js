@@ -56,8 +56,8 @@ import {
   BreadcrumbItem,
   // Form,
   // FormItem,
-  // Tabs,
-  // TabPane,
+  Tabs,
+  TabPane,
   // Tag,
   // Tree,
   // Alert,
@@ -88,14 +88,14 @@ import {
   // Timeline,
   // TimelineItem,
   Link,
-  // Divider,
+  Divider,
   // Image,
   // Calendar,
   Backtop,
   // PageHeader,
   // CascaderPanel,
   // Loading,
-  // MessageBox,
+  MessageBox,
   Message,
   // Notification,
   Scrollbar
@@ -136,8 +136,8 @@ Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 // Vue.use(Form);
 // Vue.use(FormItem);
-// Vue.use(Tabs);
-// Vue.use(TabPane);
+Vue.use(Tabs);
+Vue.use(TabPane);
 // Vue.use(Tag);
 // Vue.use(Tree);
 // Vue.use(Alert);
@@ -168,7 +168,7 @@ Vue.use(CollapseItem);
 // Vue.use(Timeline);
 // Vue.use(TimelineItem);
 Vue.use(Link);
-// Vue.use(Divider);
+Vue.use(Divider);
 // Vue.use(Image);
 // Vue.use(Calendar);
 Vue.use(Backtop);
@@ -179,9 +179,9 @@ Vue.use(Scrollbar);
 // Vue.use(Loading.directive);
 
 // Vue.prototype.$loading = Loading.service;
-// Vue.prototype.$msgbox = MessageBox;
-// Vue.prototype.$alert = MessageBox.alert;
-// Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$confirm = MessageBox.confirm;
 // Vue.prototype.$prompt = MessageBox.prompt;
 // Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;

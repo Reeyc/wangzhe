@@ -75,14 +75,16 @@
 
 <script>
 import BackTop from "base/BackTop";
+import getEquip from "api/getEquip";
 import { mapState, mapMutations } from "vuex";
+import { tabs, getType } from "styles/js/dom";
 export default {
   name: "Equip",
   data() {
     return {
+      data: [], //数据
       val: "", //搜索框变量
       radio: "", //单选框变量
-      data: [], //数据
       filterData: [], //单选框筛选后的数据
       queryData: [], //搜索框查询数据
       radioQueryData: [], //单选框筛选后,搜索框的查询数据
@@ -91,22 +93,12 @@ export default {
     };
   },
   created() {
-    //获取数据
-    this.$axios.get("/static/item.json").then(res => {
-      if (!res.data) return;
-      res.data.forEach(item => {
-        item.imgUrl = `https://game.gtimg.cn/images/yxzj/img201606/itemimg/${item.item_id}.jpg`;
-        this.queryData.push({ value: item.item_name });
-        this.radioQueryData.push({ value: item.item_name });
-      });
-      this.data = res.data;
-      this.filterData = res.data;
-    });
+    this.equip(); //获取数据
   },
   mounted() {
-    //根据首页传递的参数，高亮对应武器
+    //获取路由参数
     setTimeout(() => {
-      this.selectItem(this.$route.query.equip);
+      this.selectItem(this.$route.params.equip);
     }, 100);
   },
   computed: {
@@ -114,39 +106,48 @@ export default {
   },
   methods: {
     ...mapMutations(["handleCollectEquip"]),
-    //收藏
+    //获取数据
+    equip() {
+      getEquip().then(res => {
+        if (!res || !getType(res, "Array")) return;
+        res.forEach(item => {
+          item.imgUrl = `https://game.gtimg.cn/images/yxzj/img201606/itemimg/${item.item_id}.jpg`;
+          this.queryData.push({ value: item.item_name });
+          this.radioQueryData.push({ value: item.item_name });
+        });
+        this.data = this.filterData = res;
+      });
+    },
+    //收藏（vuex）
     collect(e) {
       let isCollect = e.target.getAttribute("isCollect");
       let id = e.target.getAttribute("index");
+      //收藏
       if (Number(isCollect) === 0) {
-        //收藏
         let currentEquip = null;
         this.data.forEach(item => {
           if (Number(id) === item.item_id) {
-            currentEquip = item;
+            this.handleCollectEquip(item); //添加至vuex.stete
+            e.target.setAttribute("isCollect", 1);
             return;
           }
         });
-        this.handleCollectEquip(currentEquip);
-        e.target.setAttribute("isCollect", 1);
         e.target.className += " el-icon-star-on";
         this.$message({
           message: `将【${e.target.getAttribute("name")}】添加至收藏夹`,
           duration: 1500,
           type: "success"
         });
-      } else {
         //取消收藏
+      } else {
         this.collectEquip.forEach((item, index) => {
           if (Number(id) === item.item_id) {
-            this.collectEquip.splice(index, 1);
+            this.collectEquip.splice(index, 1); //从vuex.state删除
+            e.target.setAttribute("isCollect", 0);
+            return;
           }
-          e.target.setAttribute("isCollect", 0);
-          e.target.className = e.target.className.replace(
-            "el-icon-star-on",
-            ""
-          );
         });
+        e.target.className = e.target.className.replace("el-icon-star-on", "");
       }
     },
     //搜索框过滤
@@ -163,36 +164,30 @@ export default {
     },
     //搜索结果高亮
     selectItem(item) {
-      item = typeof item === "object" ? item.value : item;
-      //排他
-      if (this.currentItem) {
-        this.currentItem.className = this.currentItem.className.replace(
-          "currentItem",
-          ""
-        );
-      }
-      this.currentItem = this.$refs[item][0].$el;
-      document.body.scrollTop = document.documentElement.scrollTop = this.currentItem.offsetTop;
-      this.currentItem.className += " currentItem";
+      //搜索框传递的参数是对象、路由获取的参数是url字符串
+      item = typeof item === "object" ? item.value : decodeURIComponent(item);
+      this.currentItem = this.$refs[item][0].$el || null;
+      //高亮
+      tabs(this.currentItem, "currentItem");
+      //位移
+      this.currentItem &&
+        (document.body.scrollTop = document.documentElement.scrollTop = this.currentItem.offsetTop);
     },
     //单选框筛选
     radioChange() {
-      if (this.radio === "all") {
-        //筛选全部
+      //筛选全部
+      if (this.radio === "all" || !this.radio) {
         this.filterData = this.data;
-        //筛选全部后，同步搜索框查询数据
-        this.radioQueryData = this.queryData;
+        this.radioQueryData = this.queryData; //筛选全部后，同步搜索框查询数据
         return;
       }
-
+      //筛选类别
       this.filterData = this.data.filter(item => {
-        //筛选类别
         return item.item_type === this.radio;
       });
       this.radioQueryData = [];
       this.filterData.forEach(item => {
-        //筛选类别后，同步搜索框查询数据
-        this.radioQueryData.push({ value: item.item_name });
+        this.radioQueryData.push({ value: item.item_name }); //筛选类别后，同步搜索框查询数据
       });
     }
   },
@@ -239,6 +234,7 @@ export default {
       .info
         display: flex
         align-items: center
+        text-align: center
         .el-icon-loading
           color: $theme-color
           font-size: 2em

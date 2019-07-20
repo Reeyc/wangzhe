@@ -3,7 +3,7 @@
     <!-- 公共头部 -->
     <Header></Header>
     <!-- 本来想用element-ui的scrollbar滚动条组件，但是在移动端体验很卡，无奈放弃滚动条，保留固定滚动效果 -->
-    <div style="margin-top:50px;">
+    <div style="margin-top:60px;">
       <router-view />
     </div>
     <!-- 公共底部 -->

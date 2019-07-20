@@ -2,26 +2,59 @@
   <div class="toptic">
     <div class="title">
       <h4>专题推荐</h4>
-      <router-link to="/hero">
+      <router-link to="/hero/all">
         <p>更多专题 ></p>
       </router-link>
     </div>
+    <!-- 这里写了4个固定的英雄，如果随机展示的话，没有其他英雄的图片资源，除非放弃背景图 -->
     <ul class="main">
-      <li class="toptic-item">
-        <p>李白</p>
-      </li>
-      <li class="toptic-item">
-        <p>韩信</p>
-      </li>
-      <li class="toptic-item">
-        <p>嫦娥</p>
-      </li>
-      <li class="toptic-item">
-        <p>庄周</p>
+      <li class="toptic-item" v-for="item of data" :key="item.ename" @click="heroDetail(item)">
+        <p>{{item.cname}}</p>
       </li>
     </ul>
   </div>
 </template>
+
+<script>
+import getHeroList from "api/getHeroList";
+export default {
+  data() {
+    return {
+      data: [],
+      remain: ["李白", "韩信", "嫦娥", "王昭君"]
+    };
+  },
+  created() {
+    this.heroList();
+  },
+  methods: {
+    //获取数据
+    heroList() {
+      getHeroList().then(res => {
+        if (!res) return;
+        this.remain.forEach(item => {
+          res.forEach(e => {
+            if (e.cname === item) {
+              this.data.push(e);
+              return;
+            }
+          });
+        });
+      });
+    },
+    heroDetail(val) {
+      let skinName = encodeURIComponent(val.skin_name);
+      this.$router.push({
+        name: "heroDetail",
+        query: {
+          hero: val.ename,
+          skin: skinName
+        }
+      });
+    }
+  }
+};
+</script>
 
 <style lang="stylus" scoped>
 .toptic
@@ -50,7 +83,7 @@
       font-family: 'SimSun'
       font-weight: bold
       background: url('../../../assets/images/8e49326eeeec6bb9d5ae566cf3d1aa5c.jpeg')
-      background-size: 100%
+      background-size: cover
       box-shadow: 0 4px 16px 0 #0074d9
       cursor: pointer
       p
@@ -67,9 +100,6 @@
           float: none
 @media (min-width: 768px)
   .main .toptic-item
-    background-size: cover
-    p
-      font-size: 1.4em
     &:nth-child(1)
       background-position: 0 -8px
     &:nth-child(2)
@@ -78,4 +108,6 @@
       background-position: 0 -50px
     &:nth-child(4)
       background-position: 0 -65px
+    p
+      font-size: 1.4em
 </style>

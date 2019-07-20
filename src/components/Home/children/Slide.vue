@@ -2,13 +2,22 @@
 <template>
   <swiper :options="options" class="slide">
     <swiper-slide>
-      <img src="../../../assets/images/b95359b181bdd1e23557cd66f7787e99.jpg" />
+      <img src="../../../assets/images/2.jpg" />
     </swiper-slide>
     <swiper-slide>
-      <img src="../../../assets/images/156291768878.jpg" />
+      <img src="../../../assets/images/1.jpg" />
     </swiper-slide>
     <swiper-slide>
-      <img src="../../../assets/images/1562917665435.jpg" />
+      <img src="../../../assets/images/3.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../../../assets/images/4.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../../../assets/images/5.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../../../assets/images/6.jpg" />
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
@@ -39,13 +48,13 @@ export default {
   width: 100%
   height: 100%
 .slide >>> .swiper-pagination-bullet-active
-  width: 10px
-  height: 10px
+  width: 12px
+  height: 12px
   background: #fff
 @media (min-width: 768px)
   .slide
-    height: 200px
+    height: 250px
 @media (min-width: 900px)
   .slide
-    height: 300px
+    height: 350px
 </style>

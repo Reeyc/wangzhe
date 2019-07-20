@@ -13,16 +13,27 @@ const router = new Router({
       name: 'home',
       component: () => import("@/components/Home/Home")
     }, {
-      path: '/equip',
+      path: '/equip/:equip',
       name: 'equip',
       component: () => import("@/components/Equip/Equip")
     },
     {
-      path: '/hero',
+      path: '/hero/:category',
       name: 'hero',
       component: () => import("@/components/Hero/Hero")
+    },
+    {
+      path: '/heroDetail',
+      name: 'heroDetail',
+      component: () => import("@/components/Herodetail/Herodetail")
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })
 
 export default router;

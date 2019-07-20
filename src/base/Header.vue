@@ -13,8 +13,8 @@
 
 <style lang="stylus" scoped>
 .header
-  width: 100%
-  height: 50px
+  width: inherit
+  height: 60px
   padding: 10px
   position: fixed
   top: 0
@@ -47,8 +47,6 @@
     border-radius: 50%
     cursor: pointer
 @media (min-width: 900px)
-  .header
-    width: 75%
-    .logo .title
-      font-size: 1.2em
+  .logo .title
+    font-size: 1.2em
 </style>

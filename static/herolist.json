@@ -683,14 +683,14 @@
     "title": "破晓之神",
     "new_type": 0,
     "hero_type": 1,
-    "skin_name": "破晓之神"
+    "skin_name": "破晓之神|创世神祝"
 }, {
     "ename": 505,
     "cname": "瑶",
     "title": "鹿灵守心",
     "new_type": 0,
     "hero_type": 6,
-    "skin_name": "森"
+    "skin_name": "鹿灵守心|森"
 }, {
     "ename": 506,
     "cname": "云中君",
@@ -698,11 +698,12 @@
     "new_type": 0,
     "hero_type": 4,
     "hero_type2": 1,
-    "skin_name": "荷鲁斯之眼"
+    "skin_name": "荷鲁斯之眼|流云之翼"
 }, {
     "ename": 522,
     "cname": "曜",
     "title": "星辰之子",
     "new_type": 1,
-    "hero_type": 1
+    "hero_type": 1,
+    "skin_name": "星辰之子|归虚梦演"
 }]

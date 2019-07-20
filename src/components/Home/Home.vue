@@ -16,6 +16,7 @@ import Toptic from "./children/Toptic";
 import Equip from "./children/Equip";
 import Category from "./children/Category";
 import BackTop from "base/BackTop";
+
 export default {
   name: "Home",
   components: { Slide, IconMenu, Toptic, Equip, Category, BackTop }

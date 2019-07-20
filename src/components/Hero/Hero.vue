@@ -22,8 +22,9 @@
         <el-radio :label="6">辅助</el-radio>
       </el-radio-group>
     </div>
-    <ul class="hero-container">
-      <li v-for="item of filterData" :key="item.ename" class="hero-item" @click="heroDetail">
+    <!-- 英雄列表 -->
+    <el-row class="hero-container">
+      <el-col v-for="item of filterData" :key="item.ename" :xs="6" :sm="3" class="hero-item">
         <i
           class="el-icon-star-off collect"
           @click.prevent.stop="collect"
@@ -32,16 +33,17 @@
           :name="item.cname"
         ></i>
         <i class="el-icon-loading" v-show="loading"></i>
-        <img :src="item.imgUrl" class="avatar" @load="loading=false" />
+        <img :src="item.imgUrl" class="avatar" @load="loading=false" @click="heroDetail(item)" />
         <p class="name">{{item.cname}}</p>
-      </li>
-    </ul>
+      </el-col>
+    </el-row>
     <back-top :visibility-height="100" :back-position="0" transition-name="fade" />
   </div>
 </template>
 
 <script>
 import BackTop from "base/BackTop";
+import getHeroList from "api/getHeroList";
 import { mapState, mapMutations } from "vuex";
 export default {
   data() {
@@ -56,28 +58,34 @@ export default {
     };
   },
   created() {
-    //获取数据
-    this.$axios.get("/static/herolist.json").then(res => {
-      if (!res.data) return;
-      res.data.forEach(item => {
-        item.imgUrl = `https://game.gtimg.cn/images/yxzj/img201606/heroimg/${item.ename}/${item.ename}.jpg`;
-        this.queryData.push({ value: item.cname });
-        this.radioQueryData.push({ value: item.cname });
-      });
-      this.data = res.data;
-      this.filterData = res.data;
-    });
+    this.heroList(); //获取数据
   },
   mounted() {
     setTimeout(() => {
-      this.radio = this.$route.query.hero;
-    }, 50);
+      //当前页面刷新，从url取得的参数为string
+      this.radio = Number(this.$route.params.category) || "all";
+    }, 100);
   },
   computed: {
     ...mapState(["collectHero"])
   },
   methods: {
     ...mapMutations(["handleCollectHero"]),
+    //获取数据
+    heroList() {
+      getHeroList().then(res => {
+        if (!res) return;
+        //搜索框数据
+        this.queryData = this.radioQueryData = res.map(item => {
+          return (item = { value: item.cname });
+        });
+        //英雄数据
+        res.forEach(item => {
+          item.imgUrl = `https://game.gtimg.cn/images/yxzj/img201606/heroimg/${item.ename}/${item.ename}.jpg`;
+        });
+        this.data = this.filterData = res;
+      });
+    },
     //收藏英雄
     collect(e) {
       let isCollect = e.target.getAttribute("isCollect");
@@ -130,8 +138,15 @@ export default {
       console.log(`选中${item}了`);
     },
     //英雄选中
-    heroDetail() {
-      console.log(`前往英雄详情页`);
+    heroDetail(val) {
+      let skinName = encodeURIComponent(val.skin_name);
+      this.$router.push({
+        name: "heroDetail",
+        query: {
+          hero: val.ename,
+          skin: skinName
+        }
+      });
     },
     //单选框筛选
     radioChange() {
@@ -175,20 +190,20 @@ export default {
       & >>> .el-radio__label
         padding-left: 2px
 .hero-container
-  display: flex
-  flex-wrap: wrap
-  justify-content: space-between
   padding: 10px
   text-align: center
+  overflow: hidden
   .hero-item
-    margin: 5px
+    float: left
+    padding: 10px
+    box-sizing: border-box
     text-align: center
     cursor: pointer
     position: relative
     .collect
       position: absolute
-      right: -8px
-      top: -8px
+      right: 0
+      top: 0
       font-size: 1.6em
       &.el-icon-star-on
         color: #ff4136
@@ -197,8 +212,7 @@ export default {
       font-size: 2em
     .avatar
       border-radius: 10px
-      width: 65px
-      height: 65px
+      width: 100%
     .name
       line-height: 1.5em
 @media (min-width: 768px)
@@ -211,7 +225,7 @@ export default {
     width: 75%
   .hero-container
     .hero-item
-      margin: 10px !important
+      width: 10%
     .avatar
       width: 80px !important
       height: 80px !important
