@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     collectEquip: [], //收藏的武器
-    collectHero: [] //收藏的英雄
+    collectHero: [], //收藏的英雄
   },
   mutations: {
     handleCollectEquip(state, data) {

@@ -48,8 +48,8 @@ export default {
   width: 100%
   height: 100%
 .slide >>> .swiper-pagination-bullet-active
-  width: 12px
-  height: 12px
+  width: 10px
+  height: 10px
   background: #fff
 @media (min-width: 768px)
   .slide

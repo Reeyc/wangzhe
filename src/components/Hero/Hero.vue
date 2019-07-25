@@ -77,11 +77,11 @@ export default {
         if (!res) return;
         //搜索框数据
         this.queryData = this.radioQueryData = res.map(item => {
-          return (item = { value: item.cname });
-        });
-        //英雄数据
-        res.forEach(item => {
-          item.imgUrl = `https://game.gtimg.cn/images/yxzj/img201606/heroimg/${item.ename}/${item.ename}.jpg`;
+          return (item = {
+            value: item.cname,
+            ename: item.ename,
+            skin_name: item.skin_name
+          });
         });
         this.data = this.filterData = res;
       });
@@ -134,12 +134,19 @@ export default {
       cb(results);
     },
     //搜索框选中
-    selectItem(item) {
-      console.log(`选中${item}了`);
+    selectItem(val) {
+      let skinName = encodeURIComponent(val.skin_name); //皮肤信息
+      this.$router.push({
+        name: "heroDetail",
+        query: {
+          hero: val.ename,
+          skin: skinName
+        }
+      });
     },
     //英雄选中
     heroDetail(val) {
-      let skinName = encodeURIComponent(val.skin_name);
+      let skinName = encodeURIComponent(val.skin_name); //皮肤信息
       this.$router.push({
         name: "heroDetail",
         query: {

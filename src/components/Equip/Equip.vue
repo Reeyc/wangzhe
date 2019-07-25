@@ -111,7 +111,6 @@ export default {
       getEquip().then(res => {
         if (!res || !getType(res, "Array")) return;
         res.forEach(item => {
-          item.imgUrl = `https://game.gtimg.cn/images/yxzj/img201606/itemimg/${item.item_id}.jpg`;
           this.queryData.push({ value: item.item_name });
           this.radioQueryData.push({ value: item.item_name });
         });

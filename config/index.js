@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': {
+        // target: 'http://www.hellomk.cn/wangzhe',
+        target: 'http://localhost:8081',
+        pathRewrite: {
+          //路径重写: 把请求地址中的/api替换成/static/mock, 也就是: http://localhost:8090/static/mock
+          '^/api': '/static'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -43,6 +52,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
+    // assetsPublicPath: '/wangzhe/',
     assetsPublicPath: '/',
 
     /**

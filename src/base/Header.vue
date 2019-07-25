@@ -7,7 +7,9 @@
         <h1 class="title">王者荣耀资料站</h1>
       </div>
     </el-link>
-    <div class="avatar">我</div>
+    <div class="avatar">
+      <router-link to="/admin/login">我</router-link>
+    </div>
   </el-row>
 </template>
 
@@ -42,10 +44,11 @@
     height: 40px
     line-height: 40px
     text-align: center
-    color: #fff
     background-color: #00a8e5
     border-radius: 50%
     cursor: pointer
+    a
+      color: #fff
 @media (min-width: 900px)
   .logo .title
     font-size: 1.2em

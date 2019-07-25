@@ -11,6 +11,18 @@
       </ul>
       <div class="hero-info">{{data.name}}</div>
     </div>
+    <div class="breadcrumb">
+      <span class="el-icon-s-home icon"></span>
+      <el-breadcrumb>
+        <el-breadcrumb-item>
+          <router-link to="/">首页</router-link>
+        </el-breadcrumb-item>
+        <el-breadcrumb-item>
+          <router-link to="/hero/all">英雄列表</router-link>
+        </el-breadcrumb-item>
+        <el-breadcrumb-item>{{data.name}}</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <el-row type="flex" justify="space-between" class="container first">
       <!-- ##################### module1 技能介绍 ##################### -->
       <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16" class="item skill">
@@ -475,6 +487,14 @@ export default {
     background-image: linear-gradient(160deg, #FFDEA8, #FFA719)
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
+.breadcrumb
+  padding: 0 30px
+  margin-top: 20px
+  display: flex
+  align-items: center
+  .icon
+    font-size: 20px
+    margin-right: 3px
 // ===模块容器===
 .container
   flex-wrap: wrap
